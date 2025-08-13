@@ -29,7 +29,7 @@ const TradingViewWrapper = () => {
                 try {
                     console.log('[trading-view-wrapper] Loading Scripts');
                     console.log('[trading-view-wrapper] Loading charting-library');
-                    await loadScript('/charting_library/charting_library/charting_library.standalone.js');
+                    await loadScript('/charting_library/charting_library/charting_library.js');
 
                     console.log('[trading-view-wrapper] Loading datafeeds');
                     await loadScript('/charting_library/datafeeds/udf/dist/bundle.js');
