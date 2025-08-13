@@ -1,5 +1,6 @@
 'use client';
 
+import Datafeed from "@/lib/tradingview/datafeed";
 import { loadScript, loadCSS } from "@/lib/tv/utils";
 import { useEffect, useRef, useState } from "react";
 
@@ -79,9 +80,7 @@ const TradingViewWrapper = () => {
                         library_path: '/charting_library/charting_library/',
                         // Load custom CSS
                         custom_css_url: '/charting_library/themed.css',
-                        datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
-                            'https://demo_feed.tradingview.com'
-                        )
+                        datafeed: Datafeed
                     });
 
                     console.log('[trading-view-wrapper] Widget Initialized successfully');
