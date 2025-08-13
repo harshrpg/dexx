@@ -1,0 +1,35 @@
+digraph "Original Web3 Analysis Architecture" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Original Web3 Analysis Architecture" nodesep=0.60 pad=2.0 rankdir=TB ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	"83109d08bf7c4f35abe8939555f32e1f" [label=User height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/onprem/client\client.png" shape=none]
+	subgraph "cluster_FastAPI Server" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="FastAPI Server" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"5b4054054a9b4dbfac5e31effe83f67b" [label=FastAPI height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/programming/framework\fastapi.png" shape=none]
+		subgraph "cluster_Core Services" {
+			graph [bgcolor="#EBF3E7" fontname="Sans-Serif" fontsize=12 label="Core Services" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+			"64a2f098a41f4cecb104256989a7bcb7" [label="Prompt Parser" height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/programming/language\python.png" shape=none]
+			e0d2746884694ad5b82ee4fd060f47f0 [label="Endpoint Service" height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/programming/language\python.png" shape=none]
+			"98e36f75836c4043965cb29b282a925e" [label="Insight Service" height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/programming/language\python.png" shape=none]
+		}
+		subgraph "cluster_Token Services" {
+			graph [bgcolor="#EBF3E7" fontname="Sans-Serif" fontsize=12 label="Token Services" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+			"4270f8cc86574b70986b79eb591ec73c" [label="Token Client" height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/programming/language\python.png" shape=none]
+			"27687c7a3aec4c15aaf0d24d006b725b" [label="Wallet Client" height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/programming/language\python.png" shape=none]
+		}
+	}
+	subgraph "cluster_External Services" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="External Services" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		e11a968b95334d27b8bb2523ac0a657e [label="Moralis API" height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/onprem/network\internet.png" shape=none]
+		"1b8a1d39c6cf44928ecccedf4521393a" [label="ChatGPT API" height=1.9 image="C:\Users\anuptiwari\AppData\Local\pypoetry\Cache\virtualenvs\token-insights-server-_GappeKr-py3.12\Lib\site-packages\resources/saas/chat\discord.png" shape=none]
+	}
+	"83109d08bf7c4f35abe8939555f32e1f" -> "5b4054054a9b4dbfac5e31effe83f67b" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"5b4054054a9b4dbfac5e31effe83f67b" -> "64a2f098a41f4cecb104256989a7bcb7" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"64a2f098a41f4cecb104256989a7bcb7" -> "4270f8cc86574b70986b79eb591ec73c" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"64a2f098a41f4cecb104256989a7bcb7" -> "27687c7a3aec4c15aaf0d24d006b725b" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"4270f8cc86574b70986b79eb591ec73c" -> e0d2746884694ad5b82ee4fd060f47f0 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"27687c7a3aec4c15aaf0d24d006b725b" -> e0d2746884694ad5b82ee4fd060f47f0 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	e0d2746884694ad5b82ee4fd060f47f0 -> e11a968b95334d27b8bb2523ac0a657e [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	e11a968b95334d27b8bb2523ac0a657e -> "98e36f75836c4043965cb29b282a925e" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"98e36f75836c4043965cb29b282a925e" -> "1b8a1d39c6cf44928ecccedf4521393a" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}

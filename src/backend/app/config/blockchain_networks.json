@@ -1,0 +1,392 @@
+{
+  "eth": { "names": ["ethereum", "eth", "mainnet", "ether"], "default": true },
+  "bsc": {
+    "names": ["binance", "bsc", "bnb", "binance smart chain"],
+    "default": false
+  },
+  "polygon": { "names": ["polygon", "matic", "pol", "polygon pos"], "default": false },
+  "avalanche": {
+    "names": ["avalanche", "avax", "avax c-chain", "avalanche c-chain"],
+    "default": false
+  },
+  "arbitrum": {
+    "names": ["arbitrum", "arb", "arbitrum one", "arbitrum nova"],
+    "default": false
+  },
+  "base": {
+    "names": ["base", "basechain", "coinbase chain"],
+    "default": false
+  },
+  "optimism": {
+    "names": ["optimism", "op", "op mainnet", "optimistic ethereum"],
+    "default": false
+  },
+  "fantom": {
+    "names": ["fantom", "ftm", "fantom opera", "opera"],
+    "default": false
+  },
+  "cronos": {
+    "names": ["cronos", "cro", "crypto.com chain"],
+    "default": false
+  },
+  "gnosis": {
+    "names": ["gnosis", "gno", "xdai", "gnosis chain"],
+    "default": false
+  },
+  "celo": {
+    "names": ["celo", "celo mainnet", "celochain"],
+    "default": false
+  },
+  "zkSync": {
+    "names": ["zksync", "zks", "zksync era", "era"],
+    "default": false
+  },
+  "aurora": {
+    "names": ["aurora", "aoa", "aurora near"],
+    "default": false
+  },
+  "harmony": {
+    "names": ["harmony", "one", "harmony one"],
+    "default": false
+  },
+  "moonbeam": {
+    "names": ["moonbeam", "glmr", "moonbeam polkadot"],
+    "default": false
+  },
+  "moonriver": {
+    "names": ["moonriver", "movr", "moonriver kusama"],
+    "default": false
+  },
+  "metis": {
+    "names": ["metis", "metis andromeda", "andromeda"],
+    "default": false
+  },
+  "klaytn": {
+    "names": ["klaytn", "klay", "cypress"],
+    "default": false
+  },
+  "heco": {
+    "names": ["heco", "ht", "huobi eco chain"],
+    "default": false
+  },
+  "boba": {
+    "names": ["boba", "boba network", "boba eth"],
+    "default": false
+  },
+  "syscoin": {
+    "names": ["syscoin", "sys", "syscoin nevm"],
+    "default": false
+  },
+  "fuse": {
+    "names": ["fuse", "fuse network", "fuse chain"],
+    "default": false
+  },
+  "thundercore": {
+    "names": ["thundercore", "tt", "thunder token"],
+    "default": false
+  },
+  "telos": {
+    "names": ["telos", "tlos", "telos evm"],
+    "default": false
+  },
+  "kardiachain": {
+    "names": ["kardiachain", "kai", "kai network"],
+    "default": false
+  },
+  "wanchain": {
+    "names": ["wanchain", "wan", "wanchain mainnet"],
+    "default": false
+  },
+  "crab": {
+    "names": ["crab", "crab network", "darwinia crab"],
+    "default": false
+  },
+  "evmos": {
+    "names": ["evmos", "evmos chain", "evmos cosmos"],
+    "default": false
+  },
+  "astar": {
+    "names": ["astar", "astr", "astar network"],
+    "default": false
+  },
+  "shiden": {
+    "names": ["shiden", "sdn", "shiden network"],
+    "default": false
+  },
+  "palm": {
+    "names": ["palm", "palm network", "palm nft"],
+    "default": false
+  },
+  "step": {
+    "names": ["step", "step network", "stepchain"],
+    "default": false
+  },
+  "meter": {
+    "names": ["meter", "mtr", "meter chain"],
+    "default": false
+  },
+  "oasis": {
+    "names": ["oasis", "rose", "oasis emerald"],
+    "default": false
+  },
+  "theta": {
+    "names": ["theta", "theta network", "theta mainnet"],
+    "default": false
+  },
+  "candle": {
+    "names": ["candle", "cndl", "candle platform"],
+    "default": false
+  },
+  "energi": {
+    "names": ["energi", "nrg", "energi chain"],
+    "default": false
+  },
+  "elastos": {
+    "names": ["elastos", "ela", "elastos smart chain"],
+    "default": false
+  },
+  "ontology": {
+    "names": ["ontology", "ont", "ontology mainnet"],
+    "default": false
+  },
+  "callisto": {
+    "names": ["callisto", "clo", "callisto network"],
+    "default": false
+  },
+  "okxchain": {
+    "names": ["okxchain", "okx", "okx chain", "okex chain"],
+    "default": false
+  },
+  "godwoken": {
+    "names": ["godwoken", "gw", "nervos godwoken"],
+    "default": false
+  },
+  "smartbch": {
+    "names": ["smartbch", "sbch", "smart bitcoin cash"],
+    "default": false
+  },
+  "milkomeda": {
+    "names": ["milkomeda", "milkc", "milkomeda c1"],
+    "default": false
+  },
+  "ethw": {
+    "names": ["ethw", "ethereum pow", "eth pow"],
+    "default": false
+  },
+  "cube": {
+    "names": ["cube", "cube chain", "cube network"],
+    "default": false
+  },
+  "kcc": {
+    "names": ["kcc", "kucoin chain", "kucoin community chain"],
+    "default": false
+  },
+  "bitgert": {
+    "names": ["bitgert", "brise", "brise chain"],
+    "default": false
+  },
+  "carbon": {
+    "names": ["carbon", "swth", "carbon chain"],
+    "default": false
+  },
+  "dexit": {
+    "names": ["dexit", "dxt", "dexit network"],
+    "default": false
+  },
+  "xdc": {
+    "names": ["xdc", "xdce", "xinfin"],
+    "default": false
+  },
+  "velas": {
+    "names": ["velas", "vlx", "velas evm"],
+    "default": false
+  },
+  "reef": {
+    "names": ["reef", "reef chain", "reef network"],
+    "default": false
+  },
+  "nova": {
+    "names": ["nova network", "nova", "nova chain"],
+    "default": false
+  },
+  "sx": {
+    "names": ["sx", "sx network", "sportx"],
+    "default": false
+  },
+  "etho": {
+    "names": ["etho", "etho protocol", "ether-1"],
+    "default": false
+  },
+  "poa": {
+    "names": ["poa", "poa network", "poa core"],
+    "default": false
+  },
+  "songbird": {
+    "names": ["songbird", "sgb", "songbird network"],
+    "default": false
+  },
+  "flare": {
+    "names": ["flare", "flr", "flare network"],
+    "default": false
+  },
+  "ethereumclassic": {
+    "names": ["ethereumclassic", "etc", "ethereum classic"],
+    "default": false
+  },
+  "algorand": {
+    "names": ["algorand", "algo", "algorand mainnet"],
+    "default": false
+  },
+  "solana": {
+    "names": ["solana", "sol", "solana mainnet"],
+    "default": false
+  },
+  "near": {
+    "names": ["near", "near protocol", "nearchain"],
+    "default": false
+  },
+  "cardano": {
+    "names": ["cardano", "ada", "cardano mainnet"],
+    "default": false
+  },
+  "polkadot": {
+    "names": ["polkadot", "dot", "polkadot relay"],
+    "default": false
+  },
+  "kusama": {
+    "names": ["kusama", "ksm", "kusama network"],
+    "default": false
+  },
+  "cosmos": {
+    "names": ["cosmos", "atom", "cosmos hub"],
+    "default": false
+  },
+  "osmosis": {
+    "names": ["osmosis", "osmo", "osmosis zone"],
+    "default": false
+  },
+  "juno": {
+    "names": ["juno", "juno network", "juno chain"],
+    "default": false
+  },
+  "kava": {
+    "names": ["kava", "kava network", "kava chain"],
+    "default": false
+  },
+  "secret": {
+    "names": ["secret", "scrt", "secret network"],
+    "default": false
+  },
+  "terra": {
+    "names": ["terra", "luna", "terra classic"],
+    "default": false
+  },
+  "terra2": {
+    "names": ["terra2", "luna2", "terra 2.0"],
+    "default": false
+  },
+  "thorchain": {
+    "names": ["thorchain", "rune", "thor chain"],
+    "default": false
+  },
+  "flow": {
+    "names": ["flow", "flow blockchain", "flow mainnet"],
+    "default": false
+  },
+  "tezos": {
+    "names": ["tezos", "xtz", "tezos mainnet"],
+    "default": false
+  },
+  "stellar": {
+    "names": ["stellar", "xlm", "stellar network"],
+    "default": false
+  },
+  "zilliqa": {
+    "names": ["zilliqa", "zil", "zilliqa mainnet"],
+    "default": false
+  },
+  "icon": {
+    "names": ["icon", "icx", "icon network"],
+    "default": false
+  },
+  "waves": {
+    "names": ["waves", "waves platform", "waves blockchain"],
+    "default": false
+  },
+  "neo": {
+    "names": ["neo", "neo n3", "neo blockchain"],
+    "default": false
+  },
+  "stacks": {
+    "names": ["stacks", "stx", "stacks blockchain"],
+    "default": false
+  },
+  "hedera": {
+    "names": ["hedera", "hbar", "hedera hashgraph"],
+    "default": false
+  },
+  "conflux": {
+    "names": ["conflux", "cfx", "conflux espace"],
+    "default": false
+  },
+  "iotex": {
+    "names": ["iotex", "iotx", "iotex network"],
+    "default": false
+  },
+  "kadena": {
+    "names": ["kadena", "kda", "kadena chain"],
+    "default": false
+  },
+  "elrond": {
+    "names": ["elrond", "egld", "multiversx"],
+    "default": false
+  },
+  "sui": {
+    "names": ["sui", "sui network", "sui blockchain"],
+    "default": false
+  },
+  "aptos": {
+    "names": ["aptos", "apt", "aptos chain"],
+    "default": false
+  },
+  "sei": {
+    "names": ["sei", "sei network", "sei chain"],
+    "default": false
+  },
+  "injective": {
+    "names": ["injective", "inj", "injective protocol"],
+    "default": false
+  },
+  "mantle": {
+    "names": ["mantle", "mnt", "mantle network"],
+    "default": false
+  },
+  "linea": {
+    "names": ["linea", "linea network", "linea chain"],
+    "default": false
+  },
+  "scroll": {
+    "names": ["scroll", "scroll network", "scroll chain"],
+    "default": false
+  },
+  "manta": {
+    "names": ["manta", "manta network", "manta pacific"],
+    "default": false
+  },
+  "blast": {
+    "names": ["blast", "blast network", "blast l2"],
+    "default": false
+  },
+  "mode": {
+    "names": ["mode", "mode network", "mode chain"],
+    "default": false
+  },
+  "fuel": {
+    "names": ["fuel", "fuel network", "fuel v2"],
+    "default": false
+  },
+  "starknet": {
+    "names": ["starknet", "strk", "stark network"],
+    "default": false
+  }
+}

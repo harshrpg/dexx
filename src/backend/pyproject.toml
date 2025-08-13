@@ -1,0 +1,64 @@
+[tool.poetry]  # Changed from [project]
+name = "token-insights-server"
+version = "1.1.0"
+description = "Server for exposing token insights from aarkus db"
+authors = [
+    "Harsh Gupta <harshrp94@gmail.com>"  # Changed format
+]
+readme = "README.md"
+packages = [
+    { include = "app" }  # Added packages configuration
+]
+
+[tool.poetry.dependencies]  # Changed from dependencies
+python = ">=3.10,<3.13"  # Changed from requires-python
+fastapi = ">=0.115.6,<0.116.0"  # Removed parentheses
+uvicorn = ">=0.34.0,<0.35.0"
+httpx = ">=0.28.1"
+openai = ">=1.71,<2.0.0"
+python-dotenv = ">=1.0.1,<2.0.0"
+moralis = ">=0.1.49,<0.2.0"
+pandas = ">=2.2.3,<3.0.0"
+en-core-web-sm = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl"}
+diagrams = "^0.24.1"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.20"
+pydantic = {extras = ["email"], version = "^2.10.6"}
+eth-typing = "^5.1.0"
+eth-utils = "^5.2.0"
+web3 = "^7.8.0"
+eth-account = "^0.13.5"
+pydantic-settings = "^2.7.1"
+pyjwt = "^2.10.1"
+redis = "^5.2.1"
+fakeredis = "^2.26.2"
+gunicorn = "^23.0.0"
+base58 = "^2.1.1"
+pynacl = "^1.5.0"
+numpy = "^2.2.3"
+spacy = "^3.8.4"
+rich = "^14.0.0"
+openai-agents = "^0.0.13"
+websockets = "15.0"
+solana = "^0.36.6"
+uvloop = "^0.21.0"
+
+[tool.poetry.scripts]
+start = "uvicorn app.main:app --reload"  # Fixed command format
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+flake8 = "^7.1.1"
+isort = "^5.13.2"
+pytest = "^8.3.4"
+pytest-mock = "^3.14.0"
+requests-mock = "^1.12.1"
+
+[tool.poetry.group.test.dependencies]
+pytest-cov = "^4.1.0"
+pytest-asyncio = "^0.25.3"

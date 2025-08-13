@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: token-insights-server
+    env: python
+    buildCommand: |
+      pip install poetry && 
+      poetry install &&
+      poetry run python -m spacy download en_core_web_sm
+    startCommand: poetry run uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: '3.11'

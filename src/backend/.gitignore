@@ -1,0 +1,16 @@
+.pyc# Ignore all .pyc files
+*.pyc
+
+# Ignore __pycache__ directories
+__pycache__/
+
+.log
+/logs
+
+*.png
+
+*.env
+
+poetry.lock
+
+testing_anup/.env
