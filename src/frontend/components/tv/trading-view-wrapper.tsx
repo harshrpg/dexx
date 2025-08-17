@@ -64,7 +64,7 @@ const TradingViewWrapper = () => {
                 if (typeof window !== 'undefined' && (window as any).TradingView) {
                     widget = new (window as any).TradingView.widget({
                         container: containerRef.current,
-                        symbol: 'AAPL', // Default symbol
+                        symbol: 'BTC/USD', // Default symbol
                         interval: '1D',
                         theme: 'light',
                         style: '1',
