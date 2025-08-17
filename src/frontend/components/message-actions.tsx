@@ -3,7 +3,7 @@
 import { CHAT_ID } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { useChat } from '@ai-sdk/react'
-import { Copy } from 'lucide-react'
+import { Copy, LineChart } from 'lucide-react'
 import { toast } from 'sonner'
 import { ChatShare } from './chat-share'
 import { RetryButton } from './retry-button'
@@ -16,6 +16,7 @@ interface MessageActionsProps {
   chatId?: string
   enableShare?: boolean
   className?: string
+  onOpenChart?: () => void
 }
 
 export function MessageActions({
@@ -24,7 +25,8 @@ export function MessageActions({
   reload,
   chatId,
   enableShare,
-  className
+  className,
+  onOpenChart
 }: MessageActionsProps) {
   const { status } = useChat({
     id: CHAT_ID
@@ -45,6 +47,17 @@ export function MessageActions({
       )}
     >
       {reload && <RetryButton reload={reload} messageId={messageId} />}
+      {onOpenChart && (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onOpenChart}
+          className="rounded-full"
+          title="Open chart"
+        >
+          <LineChart size={14} />
+        </Button>
+      )}
       <Button
         variant="ghost"
         size="icon"

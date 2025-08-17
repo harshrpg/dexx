@@ -17,6 +17,7 @@ export type AnswerSectionProps = {
     messageId: string,
     options?: ChatRequestOptions
   ) => Promise<string | null | undefined>
+  onOpenChart?: () => void
 }
 
 export function AnswerSection({
@@ -26,7 +27,8 @@ export function AnswerSection({
   chatId,
   showActions = true, // Default to true for backward compatibility
   messageId,
-  reload
+  reload,
+  onOpenChart
 }: AnswerSectionProps) {
   const enableShare = process.env.NEXT_PUBLIC_ENABLE_SHARE === 'true'
 
@@ -47,6 +49,7 @@ export function AnswerSection({
           chatId={chatId}
           enableShare={enableShare}
           reload={handleReload}
+          onOpenChart={onOpenChart}
         />
       )}
     </div>
