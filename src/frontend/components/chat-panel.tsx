@@ -350,6 +350,7 @@ export function ChatPanel({
               } as React.ChangeEvent<HTMLTextAreaElement>)
             }}
             className={cn(showEmptyScreen ? 'visible' : 'invisible')}
+            symbol={advancedEnabled ? advancedSymbol : undefined}
           />
         )}
       </form>

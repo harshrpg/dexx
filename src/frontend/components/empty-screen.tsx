@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 interface ExampleMessage {
   heading: string
@@ -41,32 +41,66 @@ async function fetchFinanceNews(): Promise<ExampleMessage[]> {
   }
 }
 
+function makeSymbolSuggestions(symbol: string): ExampleMessage[] {
+  const s = symbol.trim()
+  return [
+    {
+      heading: `${s}: technical outlook and key levels today`,
+      message: `Provide a concise technical outlook for ${s} with key support/resistance, trend bias, and potential setups`
+    },
+    {
+      heading: `${s}: latest news and catalysts`,
+      message: `Summarize the most recent news and catalysts impacting ${s} and how they might affect price`
+    },
+    {
+      heading: `${s}: indicators to watch now`,
+      message: `For ${s}, recommend the most relevant technical indicators right now (with parameters) and how to interpret them`
+    },
+    {
+      heading: `${s}: risk management and invalidation`,
+      message: `For ${s}, propose a risk-managed trade idea with entry/targets/stop and clear invalidation criteria`
+    }
+  ]
+}
+
 export function EmptyScreen({
   submitMessage,
-  className
+  className,
+  symbol
 }: {
   submitMessage: (message: string) => void
   className?: string
+  symbol?: string
 }) {
   const [exampleMessages, setExampleMessages] = useState<ExampleMessage[]>(fallbackMessages)
   const [isLoading, setIsLoading] = useState(true)
 
+  const hasSymbol = useMemo(() => Boolean(symbol && symbol.trim().length > 0), [symbol])
+
   useEffect(() => {
-    async function loadFinanceNews() {
+    let mounted = true
+    async function load() {
       setIsLoading(true)
       try {
-        const news = await fetchFinanceNews()
-        setExampleMessages(news)
+        if (hasSymbol && symbol) {
+          const suggestions = makeSymbolSuggestions(symbol)
+          if (mounted) setExampleMessages(suggestions)
+        } else {
+          const news = await fetchFinanceNews()
+          if (mounted) setExampleMessages(news)
+        }
       } catch (error) {
-        console.error('Failed to load finance news:', error)
-        setExampleMessages(fallbackMessages)
+        console.error('Failed to load suggestions:', error)
+        if (mounted) setExampleMessages(fallbackMessages)
       } finally {
-        setIsLoading(false)
+        if (mounted) setIsLoading(false)
       }
     }
-
-    loadFinanceNews()
-  }, [])
+    load()
+    return () => {
+      mounted = false
+    }
+  }, [hasSymbol, symbol])
 
   return (
     <div className={`mx-auto w-full transition-all ${className}`}>
@@ -104,3 +138,4 @@ export function EmptyScreen({
     </div>
   )
 }
+
