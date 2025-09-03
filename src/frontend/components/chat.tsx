@@ -12,6 +12,7 @@ import { ChatMessages } from './chat-messages'
 import { ChatPanel } from './chat-panel'
 import { useAdvancedMode } from '@/hooks/use-advanced-mode'
 import { useAppSelector } from '@/lib/store/hooks'
+import dynamic from 'next/dynamic'
 
 // Define section structure
 interface ChatSection {
@@ -19,6 +20,10 @@ interface ChatSection {
   userMessage: Message
   assistantMessages: Message[]
 }
+
+const TradingViewWrapper = dynamic(() => import('@/components/tv/trading-view-wrapper'), {
+  ssr: false,
+});
 
 export function Chat({
   id,
@@ -217,7 +222,9 @@ export function Chat({
       data-testid="full-chat"
     >
       {advancedModeStoreValue ? (
-        <div className="p-4">hello</div>
+        <div className="p-0">
+          <TradingViewWrapper />
+        </div>
       ) : (
         <ChatMessages
           sections={sections}
