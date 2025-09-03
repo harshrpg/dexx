@@ -6,13 +6,18 @@ import { useEffect, useMemo, useState } from 'react'
 import { RenderMessage } from './render-message'
 import { ToolSection } from './tool-section'
 import { Spinner } from './ui/spinner'
-
+import * as Tabs from '@radix-ui/react-tabs'
+import dynamic from 'next/dynamic'
 // Import section structure interface
 interface ChatSection {
   id: string
   userMessage: Message
   assistantMessages: Message[]
 }
+
+const TradingViewWrapper = dynamic(() => import('@/components/tv/trading-view-wrapper'), {
+  ssr: false,
+});
 
 interface ChatMessagesProps {
   sections: ChatSection[] // Changed from messages to sections
@@ -115,73 +120,91 @@ export function ChatMessages({
   }
 
   return (
-    <div
-      id="scroll-container"
-      ref={scrollContainerRef}
-      role="list"
-      aria-roledescription="chat messages"
-      className={cn(
-        'relative size-full pt-14',
-        sections.length > 0 ? 'flex-1 overflow-y-auto' : ''
-      )}
-    >
-      <div className="relative mx-auto w-full max-w-3xl px-4">
-        {sections.map((section, sectionIndex) => (
-          <div
-            key={section.id}
-            id={`section-${section.id}`}
-            className="chat-section mb-8"
-            style={
-              sectionIndex === sections.length - 1
-                ? { minHeight: 'calc(-228px + 100dvh)' }
-                : {}
-            }
-          >
-            {/* User message */}
-            <div className="flex flex-col gap-4 mb-4">
-              <RenderMessage
-                message={section.userMessage}
-                messageId={section.userMessage.id}
-                getIsOpen={getIsOpen}
-                onOpenChange={handleOpenChange}
-                onQuerySelect={onQuerySelect}
-                chatId={chatId}
-                addToolResult={addToolResult}
-                onUpdateMessage={onUpdateMessage}
-                reload={reload}
-              />
-              {showLoading && <Spinner />}
-            </div>
+    <Tabs.Root defaultValue="tab1" className="flex flex-col flex-1 min-h-0">
+      <Tabs.List aria-label="Asset Analysis" className="sticky top-0 z-10 flex gap-2 border-b bg-background px-4 py-2">
+        <Tabs.Trigger value='tab1' className="data-[state=active]:font-semibold px-2 py-1 rounded hover:bg-muted">
+          Fundamental Analysis
+        </Tabs.Trigger>
+        <Tabs.Trigger value='tab2' className="data-[state=active]:font-semibold px-2 py-1 rounded hover:bg-muted">
+          Chart
+        </Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value='tab1' className="hidden data-[state=active]:flex min-h-0 flex-1 overflow-hidden">
+        <div
+          id="scroll-container"
+          ref={scrollContainerRef}
+          role="list"
+          aria-roledescription="chat messages"
+          className={cn(
+            'relative size-full pt-12 h-full overflow-y-auto',
+            sections.length > 0 ? 'flex-1 overflow-y-auto' : ''
+          )}
+        >
+          <div className="relative mx-auto w-full max-w-3xl px-4">
+            {sections.map((section, sectionIndex) => (
+              <div
+                key={section.id}
+                id={`section-${section.id}`}
+                className="chat-section mb-8"
+                style={
+                  sectionIndex === sections.length - 1
+                    ? { minHeight: 'calc(-228px + 100dvh)' }
+                    : {}
+                }
+              >
+                {/* User message */}
+                <div className="flex flex-col gap-4 mb-4">
+                  <RenderMessage
+                    message={section.userMessage}
+                    messageId={section.userMessage.id}
+                    getIsOpen={getIsOpen}
+                    onOpenChange={handleOpenChange}
+                    onQuerySelect={onQuerySelect}
+                    chatId={chatId}
+                    addToolResult={addToolResult}
+                    onUpdateMessage={onUpdateMessage}
+                    reload={reload}
+                  />
+                  {showLoading && <Spinner />}
+                </div>
 
-            {/* Assistant messages */}
-            {section.assistantMessages.map(assistantMessage => (
-              <div key={assistantMessage.id} className="flex flex-col gap-4">
-                <RenderMessage
-                  message={assistantMessage}
-                  messageId={assistantMessage.id}
-                  getIsOpen={getIsOpen}
-                  onOpenChange={handleOpenChange}
-                  onQuerySelect={onQuerySelect}
-                  chatId={chatId}
-                  addToolResult={addToolResult}
-                  onUpdateMessage={onUpdateMessage}
-                  reload={reload}
-                />
+                {/* Assistant messages */}
+                {section.assistantMessages.map(assistantMessage => (
+                  <div key={assistantMessage.id} className="flex flex-col gap-4">
+                    <RenderMessage
+                      message={assistantMessage}
+                      messageId={assistantMessage.id}
+                      getIsOpen={getIsOpen}
+                      onOpenChange={handleOpenChange}
+                      onQuerySelect={onQuerySelect}
+                      chatId={chatId}
+                      addToolResult={addToolResult}
+                      onUpdateMessage={onUpdateMessage}
+                      reload={reload}
+                    />
+                  </div>
+                ))}
               </div>
             ))}
-          </div>
-        ))}
 
-        {showLoading && lastToolData && (
-          <ToolSection
-            key={manualToolCallId}
-            tool={lastToolData}
-            isOpen={getIsOpen(manualToolCallId)}
-            onOpenChange={open => handleOpenChange(manualToolCallId, open)}
-            addToolResult={addToolResult}
-          />
-        )}
-      </div>
-    </div>
+            {showLoading && lastToolData && (
+              <ToolSection
+                key={manualToolCallId}
+                tool={lastToolData}
+                isOpen={getIsOpen(manualToolCallId)}
+                onOpenChange={open => handleOpenChange(manualToolCallId, open)}
+                addToolResult={addToolResult}
+              />
+            )}
+          </div>
+        </div>
+      </Tabs.Content>
+      <Tabs.Content value='tab2' className="hidden data-[state=active]:flex flex-col flex-1 min-h-0">
+        <div className="w-full flex-1 min-h-0 overflow-hidden">
+          <TradingViewWrapper />
+        </div>
+      </Tabs.Content>
+    </Tabs.Root>
+
   )
 }

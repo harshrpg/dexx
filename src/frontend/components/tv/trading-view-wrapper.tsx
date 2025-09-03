@@ -75,7 +75,7 @@ const TradingViewWrapper = () => {
                         container_id: 'tradingview_widget',
                         width: '100%',
                         height: '100%',
-                        fullscreen: true,
+                        fullscreen: false,
                         // Configure the correct bundle path
                         library_path: '/charting_library/charting_library/',
                         // Load custom CSS
@@ -113,8 +113,8 @@ const TradingViewWrapper = () => {
     if (error) {
         return (
             <div style={{
-                width: '100vw',
-                height: '100vh',
+                width: '100%',
+                height: '100%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -130,8 +130,8 @@ const TradingViewWrapper = () => {
 
     return (
         <div style={{
-            width: '100vw',
-            height: '100vh',
+            width: '100%',
+            height: '100%',
             position: 'relative',
             backgroundColor: '#000'
         }}>

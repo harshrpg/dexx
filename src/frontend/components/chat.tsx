@@ -14,6 +14,7 @@ import { useAdvancedMode } from '@/hooks/use-advanced-mode'
 import { useAppSelector } from '@/lib/store/hooks'
 import dynamic from 'next/dynamic'
 
+
 // Define section structure
 interface ChatSection {
   id: string // User message ID
@@ -221,23 +222,17 @@ export function Chat({
       )}
       data-testid="full-chat"
     >
-      {advancedModeStoreValue ? (
-        <div className="p-0">
-          <TradingViewWrapper />
-        </div>
-      ) : (
-        <ChatMessages
-          sections={sections}
-          data={data}
-          onQuerySelect={onQuerySelect}
-          isLoading={isLoading}
-          chatId={id}
-          addToolResult={addToolResult}
-          scrollContainerRef={scrollContainerRef}
-          onUpdateMessage={handleUpdateAndReloadMessage}
-          reload={handleReloadFrom}
-        />
-      )}
+      <ChatMessages
+        sections={sections}
+        data={data}
+        onQuerySelect={onQuerySelect}
+        isLoading={isLoading}
+        chatId={id}
+        addToolResult={addToolResult}
+        scrollContainerRef={scrollContainerRef}
+        onUpdateMessage={handleUpdateAndReloadMessage}
+        reload={handleReloadFrom}
+      />
       <ChatPanel
         input={input}
         handleInputChange={handleInputChange}
