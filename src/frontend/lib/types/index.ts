@@ -12,10 +12,10 @@ export type SearchResults = {
 export type SearchResultImage =
   | string
   | {
-      url: string
-      description: string
-      number_of_results?: number
-    }
+    url: string
+    description: string
+    number_of_results?: number
+  }
 
 export type ExaSearchResults = {
   results: ExaSearchResultItem[]
@@ -65,6 +65,7 @@ export interface Chat extends Record<string, any> {
   path: string
   messages: ExtendedCoreMessage[] // Note: Changed from AIMessage to ExtendedCoreMessage
   sharePath?: string
+  advancedChatEnabled?: boolean
 }
 
 // ExtendedCoreMessage for saveing annotations
@@ -79,15 +80,15 @@ export type AIMessage = {
   id: string
   name?: string
   type?:
-    | 'answer'
-    | 'related'
-    | 'skip'
-    | 'inquiry'
-    | 'input'
-    | 'input_related'
-    | 'tool'
-    | 'followup'
-    | 'end'
+  | 'answer'
+  | 'related'
+  | 'skip'
+  | 'inquiry'
+  | 'input'
+  | 'input_related'
+  | 'tool'
+  | 'followup'
+  | 'end'
 }
 
 export interface SearXNGResult {

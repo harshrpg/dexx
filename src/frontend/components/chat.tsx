@@ -10,6 +10,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { ChatMessages } from './chat-messages'
 import { ChatPanel } from './chat-panel'
+import { useAdvancedMode } from '@/hooks/use-advanced-mode'
+import { useAppSelector } from '@/lib/store/hooks'
 
 // Define section structure
 interface ChatSection {
@@ -63,6 +65,9 @@ export function Chat({
   })
 
   const isLoading = status === 'submitted' || status === 'streaming'
+
+  const advancedMode = useAdvancedMode()
+  const advancedModeStoreValue = useAppSelector((s) => s.advancedMode.value);
 
   // Convert messages array to sections array
   const sections = useMemo<ChatSection[]>(() => {
@@ -199,6 +204,10 @@ export function Chat({
     handleSubmit(e)
   }
 
+  useEffect(() => {
+    console.log('######## ==> Advanced Mode Store Value: ', advancedModeStoreValue)
+  }, [advancedModeStoreValue])
+
   return (
     <div
       className={cn(
@@ -207,17 +216,21 @@ export function Chat({
       )}
       data-testid="full-chat"
     >
-      <ChatMessages
-        sections={sections}
-        data={data}
-        onQuerySelect={onQuerySelect}
-        isLoading={isLoading}
-        chatId={id}
-        addToolResult={addToolResult}
-        scrollContainerRef={scrollContainerRef}
-        onUpdateMessage={handleUpdateAndReloadMessage}
-        reload={handleReloadFrom}
-      />
+      {advancedModeStoreValue ? (
+        <div className="p-4">hello</div>
+      ) : (
+        <ChatMessages
+          sections={sections}
+          data={data}
+          onQuerySelect={onQuerySelect}
+          isLoading={isLoading}
+          chatId={id}
+          addToolResult={addToolResult}
+          scrollContainerRef={scrollContainerRef}
+          onUpdateMessage={handleUpdateAndReloadMessage}
+          reload={handleReloadFrom}
+        />
+      )}
       <ChatPanel
         input={input}
         handleInputChange={handleInputChange}

@@ -33,6 +33,7 @@ export async function POST(req: Request) {
     const cookieStore = await cookies()
     const modelJson = cookieStore.get('selectedModel')?.value
     const searchMode = cookieStore.get('search-mode')?.value === 'true'
+    const advancedChatEnabled = cookieStore.get('advanced-mode-enabled')?.value === 'true'
 
     let selectedModel = DEFAULT_MODEL
 
@@ -61,19 +62,21 @@ export async function POST(req: Request) {
 
     return supportsToolCalling
       ? createToolCallingStreamResponse({
-          messages,
-          model: selectedModel,
-          chatId,
-          searchMode,
-          userId
-        })
+        messages,
+        model: selectedModel,
+        chatId,
+        searchMode,
+        userId,
+        advancedChatEnabled
+      })
       : createManualToolStreamResponse({
-          messages,
-          model: selectedModel,
-          chatId,
-          searchMode,
-          userId
-        })
+        messages,
+        model: selectedModel,
+        chatId,
+        searchMode,
+        userId,
+        advancedChatEnabled
+      })
   } catch (error) {
     console.error('API route error:', error)
     return new Response('Error processing your request', {

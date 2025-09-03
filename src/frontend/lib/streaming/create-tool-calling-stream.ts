@@ -27,7 +27,7 @@ function containsAskQuestionTool(message: CoreMessage) {
 export function createToolCallingStreamResponse(config: BaseStreamConfig) {
   return createDataStreamResponse({
     execute: async (dataStream: DataStreamWriter) => {
-      const { messages, model, chatId, searchMode, userId } = config
+      const { messages, model, chatId, searchMode, userId, advancedChatEnabled } = config
       const modelId = `${model.providerId}:${model.id}`
 
       try {
@@ -52,7 +52,7 @@ export function createToolCallingStreamResponse(config: BaseStreamConfig) {
               (result.response.messages.length > 0 &&
                 containsAskQuestionTool(
                   result.response.messages[
-                    result.response.messages.length - 1
+                  result.response.messages.length - 1
                   ] as CoreMessage
                 ))
 
@@ -63,7 +63,8 @@ export function createToolCallingStreamResponse(config: BaseStreamConfig) {
               chatId,
               dataStream,
               userId,
-              skipRelatedQuestions: shouldSkipRelatedQuestions
+              skipRelatedQuestions: shouldSkipRelatedQuestions,
+              advancedChatEnabled
             })
           }
         })

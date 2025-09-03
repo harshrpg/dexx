@@ -55,6 +55,9 @@ export async function getChats(userId?: string | null) {
         if (plainChat.createdAt && !(plainChat.createdAt instanceof Date)) {
           plainChat.createdAt = new Date(plainChat.createdAt)
         }
+        if (typeof plainChat.advancedChatEnabled === 'string') {
+          plainChat.advancedChatEnabled = plainChat.advancedChatEnabled === 'true'
+        }
         return plainChat as Chat
       })
   } catch (error) {
@@ -138,6 +141,10 @@ export async function getChat(id: string, userId: string = 'anonymous') {
   // Ensure messages is always an array
   if (!Array.isArray(chat.messages)) {
     chat.messages = []
+  }
+
+  if (typeof (chat as any).advancedChatEnabled === 'string') {
+    ; (chat as any).advancedChatEnabled = (chat as any).advancedChatEnabled === 'true'
   }
 
   return chat

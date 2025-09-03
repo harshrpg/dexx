@@ -13,6 +13,7 @@ interface HandleStreamFinishParams {
   userId: string
   skipRelatedQuestions?: boolean
   annotations?: ExtendedCoreMessage[]
+  advancedChatEnabled?: boolean
 }
 
 export async function handleStreamFinish({
@@ -23,7 +24,8 @@ export async function handleStreamFinish({
   dataStream,
   userId,
   skipRelatedQuestions = false,
-  annotations = []
+  annotations = [],
+  advancedChatEnabled
 }: HandleStreamFinishParams) {
   try {
     const extendedCoreMessages = convertToExtendedCoreMessages(originalMessages)
@@ -77,14 +79,16 @@ export async function handleStreamFinish({
       userId: userId,
       path: `/search/${chatId}`,
       title: originalMessages[0].content,
-      id: chatId
+      id: chatId,
+      advancedChatEnabled
     }
 
     // Save chat with complete response and related questions
     await saveChat(
       {
         ...savedChat,
-        messages: generatedMessages
+        messages: generatedMessages,
+        advancedChatEnabled
       },
       userId
     ).catch(error => {

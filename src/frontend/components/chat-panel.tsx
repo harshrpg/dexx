@@ -17,6 +17,9 @@ import { AdvancedAiSwitch } from './advanced-ai-switch'
 import { SymbolSelect } from './symbol-select'
 import type { SymbolSearchItem } from '@/lib/tradingview/symbols'
 import { fetchAllSymbols } from '@/lib/tradingview/symbols'
+import { setCookie } from '@/lib/utils/cookies'
+import { useAppDispatch } from '@/lib/store/hooks'
+import { set } from '@/features/advanced-mode/advancedModeSlice'
 
 interface ChatPanelProps {
   input: string
@@ -62,6 +65,8 @@ export function ChatPanel({
   const [advancedSymbol, setAdvancedSymbol] = useState<string>('')
   const [symbolOptions, setSymbolOptions] = useState<SymbolSearchItem[] | null>(null)
   const [symbolsLoading, setSymbolsLoading] = useState<boolean>(false)
+
+  const dispatch = useAppDispatch();
 
   // Prefetch symbols on first render
   useEffect(() => {
@@ -117,6 +122,12 @@ export function ChatPanel({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
+
+  // When Advanced toggles, write cookie readable by API
+  useEffect(() => {
+    try { setCookie('advanced-mode-enabled', String(advancedEnabled)) } catch { }
+    dispatch(set(advancedEnabled));
+  }, [advancedEnabled])
 
   // Scroll to the bottom of the container
   const handleScrollToBottom = () => {

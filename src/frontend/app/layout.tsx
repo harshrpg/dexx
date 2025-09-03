@@ -10,6 +10,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import './globals.css'
+import StoreProvider from '@/components/store-provider'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -69,24 +70,26 @@ export default async function RootLayout({
         )}
         suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SidebarProvider defaultOpen>
-            <AppSidebar />
-            <div className="flex flex-col flex-1">
-              <Header user={user} />
-              <main className="flex flex-1 min-h-0">
-                <ArtifactRoot>{children}</ArtifactRoot>
-              </main>
-            </div>
-          </SidebarProvider>
-          <Toaster />
-          <Analytics />
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SidebarProvider defaultOpen>
+              <AppSidebar />
+              <div className="flex flex-col flex-1">
+                <Header user={user} />
+                <main className="flex flex-1 min-h-0">
+                  <ArtifactRoot>{children}</ArtifactRoot>
+                </main>
+              </div>
+            </SidebarProvider>
+            <Toaster />
+            <Analytics />
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   )

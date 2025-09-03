@@ -225,3 +225,10 @@ Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
 ## 📄 License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+
+## Todos
+[-] Store advanced mode in cookies
+[ ] Read advanced mode from cookies
+[ ] Change the sidebar from history to tabbed on advanced mode enabled
+[ ] Show the trading view chart instead of ChatMessage
