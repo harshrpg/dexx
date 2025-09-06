@@ -10,9 +10,9 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { ChatMessages } from './chat-messages'
 import { ChatPanel } from './chat-panel'
-import { useAdvancedMode } from '@/hooks/use-advanced-mode'
 import { useAppSelector } from '@/lib/store/hooks'
 import dynamic from 'next/dynamic'
+import { AdvancedModeState } from '@/types/chatInput'
 
 
 // Define section structure
@@ -22,20 +22,18 @@ interface ChatSection {
   assistantMessages: Message[]
 }
 
-const TradingViewWrapper = dynamic(() => import('@/components/tv/trading-view-wrapper'), {
-  ssr: false,
-});
-
 export function Chat({
   id,
   savedMessages = [],
   query,
-  models
+  models,
+  advancedModeValues
 }: {
   id: string
   savedMessages?: Message[]
   query?: string
   models?: Model[]
+  advancedModeValues?: AdvancedModeState
 }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [isAtBottom, setIsAtBottom] = useState(true)
@@ -71,8 +69,6 @@ export function Chat({
   })
 
   const isLoading = status === 'submitted' || status === 'streaming'
-
-  const advancedMode = useAdvancedMode()
   const advancedModeStoreValue = useAppSelector((s) => s.advancedMode.value);
 
   // Convert messages array to sections array
@@ -246,6 +242,7 @@ export function Chat({
         models={models}
         showScrollToBottomButton={!isAtBottom}
         scrollContainerRef={scrollContainerRef}
+        advancedModeValues={advancedModeValues}
       />
     </div>
   )

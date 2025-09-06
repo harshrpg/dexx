@@ -37,6 +37,7 @@ interface ChatPanelProps {
   showScrollToBottomButton: boolean
   /** Reference to the scroll container */
   scrollContainerRef: React.RefObject<HTMLDivElement>
+  advancedModeValues?: AdvancedModeState
 }
 
 export function ChatPanel({
@@ -51,7 +52,8 @@ export function ChatPanel({
   append,
   models,
   showScrollToBottomButton,
-  scrollContainerRef
+  scrollContainerRef,
+  advancedModeValues
 }: ChatPanelProps) {
   const [showEmptyScreen, setShowEmptyScreen] = useState(false)
   const router = useRouter()
@@ -62,8 +64,8 @@ export function ChatPanel({
   const { close: closeArtifact } = useArtifact()
 
   // Advanced AI mode state
-  const [advancedEnabled, setAdvancedEnabled] = useState<boolean>(false)
-  const [advancedSymbol, setAdvancedSymbol] = useState<string>('BTC/USD')
+  const [advancedEnabled, setAdvancedEnabled] = useState<boolean>(advancedModeValues?.value || false)
+  const [advancedSymbol, setAdvancedSymbol] = useState<string>(advancedModeValues?.symbol || 'BTC/USD')
   const [symbolOptions, setSymbolOptions] = useState<SymbolSearchItem[] | null>(null)
   const [symbolsLoading, setSymbolsLoading] = useState<boolean>(false)
 

@@ -5,6 +5,7 @@ import { getModels } from '@/lib/config/models'
 import { convertToUIMessages } from '@/lib/utils'
 import { notFound, redirect } from 'next/navigation'
 import { ExtendedCoreMessage, SearchResults } from '@/lib/types'; // Added SearchResults
+import { AdvancedModeState } from '@/types/chatInput'
 
 export const maxDuration = 60
 
@@ -69,6 +70,15 @@ export default async function SearchPage(props: {
     notFound()
   }
 
+  const advancedModeValues: AdvancedModeState = {
+    value: chat.advancedChatEnabled,
+    symbol: chat.advancedChatSymbol
+  }
+
   const models = await getModels()
-  return <Chat id={id} savedMessages={messages} models={models} />
+  return <Chat
+    id={id}
+    savedMessages={messages}
+    models={models}
+    advancedModeValues={advancedModeValues} />
 }

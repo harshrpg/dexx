@@ -65,7 +65,7 @@ export interface Chat extends Record<string, any> {
   path: string
   messages: ExtendedCoreMessage[] // Note: Changed from AIMessage to ExtendedCoreMessage
   sharePath?: string
-  advancedChatEnabled?: boolean,
+  advancedChatEnabled: boolean,
   advancedChatSymbol: string
 }
 
