@@ -8,6 +8,7 @@ import { ToolSection } from './tool-section'
 import { Spinner } from './ui/spinner'
 import * as Tabs from '@radix-ui/react-tabs'
 import dynamic from 'next/dynamic'
+import { useAppSelector } from '@/lib/store/hooks'
 // Import section structure interface
 interface ChatSection {
   id: string
@@ -48,6 +49,7 @@ export function ChatMessages({
 }: ChatMessagesProps) {
   const [openStates, setOpenStates] = useState<Record<string, boolean>>({})
   const manualToolCallId = 'manual-tool-call'
+  const advancedModeEnabled = useAppSelector((s) => s.advancedMode.value);
 
   useEffect(() => {
     // Open manual tool call when the last section is a user message
@@ -125,9 +127,11 @@ export function ChatMessages({
         <Tabs.Trigger value='tab1' className="data-[state=active]:font-semibold px-2 py-1 rounded hover:bg-muted">
           Fundamental Analysis
         </Tabs.Trigger>
-        <Tabs.Trigger value='tab2' className="data-[state=active]:font-semibold px-2 py-1 rounded hover:bg-muted">
-          Chart
-        </Tabs.Trigger>
+        {advancedModeEnabled && (
+          <Tabs.Trigger value='tab2' className="data-[state=active]:font-semibold px-2 py-1 rounded hover:bg-muted">
+            Chart
+          </Tabs.Trigger>
+        )}
       </Tabs.List>
       <Tabs.Content value='tab1' className="hidden data-[state=active]:flex min-h-0 flex-1 overflow-hidden">
         <div
@@ -199,11 +203,14 @@ export function ChatMessages({
           </div>
         </div>
       </Tabs.Content>
-      <Tabs.Content value='tab2' className="hidden data-[state=active]:flex flex-col flex-1 min-h-0">
-        <div className="w-full flex-1 min-h-0 overflow-hidden">
-          <TradingViewWrapper />
-        </div>
-      </Tabs.Content>
+      {advancedModeEnabled && (
+        <Tabs.Content value='tab2' className="hidden data-[state=active]:flex flex-col flex-1 min-h-0">
+          <div className="w-full flex-1 min-h-0 overflow-hidden">
+            <TradingViewWrapper />
+          </div>
+        </Tabs.Content>
+      )}
+
     </Tabs.Root>
 
   )
