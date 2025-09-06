@@ -34,6 +34,7 @@ export async function POST(req: Request) {
     const modelJson = cookieStore.get('selectedModel')?.value
     const searchMode = cookieStore.get('search-mode')?.value === 'true'
     const advancedChatEnabled = cookieStore.get('advanced-mode-enabled')?.value === 'true'
+    const advancedChatSymbol = cookieStore.get('advanced-mode-symbol')?.value || 'BTC/USD'
 
     let selectedModel = DEFAULT_MODEL
 
@@ -67,7 +68,8 @@ export async function POST(req: Request) {
         chatId,
         searchMode,
         userId,
-        advancedChatEnabled
+        advancedChatEnabled,
+        advancedChatSymbol
       })
       : createManualToolStreamResponse({
         messages,
@@ -75,7 +77,8 @@ export async function POST(req: Request) {
         chatId,
         searchMode,
         userId,
-        advancedChatEnabled
+        advancedChatEnabled,
+        advancedChatSymbol
       })
   } catch (error) {
     console.error('API route error:', error)

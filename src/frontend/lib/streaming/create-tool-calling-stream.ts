@@ -27,7 +27,7 @@ function containsAskQuestionTool(message: CoreMessage) {
 export function createToolCallingStreamResponse(config: BaseStreamConfig) {
   return createDataStreamResponse({
     execute: async (dataStream: DataStreamWriter) => {
-      const { messages, model, chatId, searchMode, userId, advancedChatEnabled } = config
+      const { messages, model, chatId, searchMode, userId, advancedChatEnabled, advancedChatSymbol } = config
       const modelId = `${model.providerId}:${model.id}`
 
       try {
@@ -64,7 +64,8 @@ export function createToolCallingStreamResponse(config: BaseStreamConfig) {
               dataStream,
               userId,
               skipRelatedQuestions: shouldSkipRelatedQuestions,
-              advancedChatEnabled
+              advancedChatEnabled,
+              advancedChatSymbol
             })
           }
         })

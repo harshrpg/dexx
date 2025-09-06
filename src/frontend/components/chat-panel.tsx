@@ -126,7 +126,12 @@ export function ChatPanel({
 
   // When Advanced toggles, write cookie readable by API
   useEffect(() => {
-    try { setCookie('advanced-mode-enabled', String(advancedEnabled)) } catch { }
+    try {
+      setCookie('advanced-mode-enabled', String(advancedEnabled))
+      setCookie('advanced-mode-symbol', advancedSymbol)
+    } catch {
+      throw Error('Unable to store advanced mode cookies');
+    }
     const advancedModeValue: AdvancedModeState = {
       value: advancedEnabled,
       symbol: advancedSymbol

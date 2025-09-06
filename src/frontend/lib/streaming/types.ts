@@ -7,5 +7,6 @@ export interface BaseStreamConfig {
   chatId: string
   searchMode: boolean
   userId: string
-  advancedChatEnabled: boolean
+  advancedChatEnabled: boolean,
+  advancedChatSymbol: string
 }
