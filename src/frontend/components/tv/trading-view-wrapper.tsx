@@ -1,5 +1,6 @@
 'use client';
 
+import { useAppSelector } from "@/lib/store/hooks";
 import Datafeed from "@/lib/tradingview/datafeed";
 import { loadScript, loadCSS } from "@/lib/tv/utils";
 import { useEffect, useRef, useState } from "react";
@@ -12,6 +13,7 @@ const TradingViewWrapper = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const symbol = useAppSelector((s) => s.advancedMode.symbol);
 
     useEffect(() => {
         let isMounted = true;
@@ -64,7 +66,7 @@ const TradingViewWrapper = () => {
                 if (typeof window !== 'undefined' && (window as any).TradingView) {
                     widget = new (window as any).TradingView.widget({
                         container: containerRef.current,
-                        symbol: 'BTC/USD', // Default symbol
+                        symbol: symbol, // Default symbol
                         interval: '1D',
                         theme: 'light',
                         style: '1',

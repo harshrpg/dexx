@@ -1,14 +1,15 @@
+import { AdvancedModeState } from "@/types/chatInput";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-type AdvancedModeState = { value: boolean }
-const initialState: AdvancedModeState = { value: false }
+const initialState: AdvancedModeState = { value: false, symbol: 'BTC/USD' }
 
 const advancedModeSlice = createSlice({
     name: 'advancedMode',
     initialState,
     reducers: {
-        set: (s, a: PayloadAction<boolean>) => {
-            s.value = a.payload;
+        set: (s, a: PayloadAction<AdvancedModeState>) => {
+            s.value = a.payload.value;
+            s.symbol = a.payload.symbol;
         },
     },
 });

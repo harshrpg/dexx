@@ -20,6 +20,7 @@ import { fetchAllSymbols } from '@/lib/tradingview/symbols'
 import { setCookie } from '@/lib/utils/cookies'
 import { useAppDispatch } from '@/lib/store/hooks'
 import { set } from '@/features/advanced-mode/advancedModeSlice'
+import { AdvancedModeState } from '@/types/chatInput'
 
 interface ChatPanelProps {
   input: string
@@ -62,7 +63,7 @@ export function ChatPanel({
 
   // Advanced AI mode state
   const [advancedEnabled, setAdvancedEnabled] = useState<boolean>(false)
-  const [advancedSymbol, setAdvancedSymbol] = useState<string>('')
+  const [advancedSymbol, setAdvancedSymbol] = useState<string>('BTC/USD')
   const [symbolOptions, setSymbolOptions] = useState<SymbolSearchItem[] | null>(null)
   const [symbolsLoading, setSymbolsLoading] = useState<boolean>(false)
 
@@ -126,8 +127,12 @@ export function ChatPanel({
   // When Advanced toggles, write cookie readable by API
   useEffect(() => {
     try { setCookie('advanced-mode-enabled', String(advancedEnabled)) } catch { }
-    dispatch(set(advancedEnabled));
-  }, [advancedEnabled])
+    const advancedModeValue: AdvancedModeState = {
+      value: advancedEnabled,
+      symbol: advancedSymbol
+    }
+    dispatch(set(advancedModeValue));
+  }, [advancedEnabled, advancedSymbol])
 
   // Scroll to the bottom of the container
   const handleScrollToBottom = () => {
