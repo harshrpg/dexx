@@ -19,6 +19,7 @@ interface RenderMessageProps {
     messageId: string,
     options?: ChatRequestOptions
   ) => Promise<string | null | undefined>
+  onOpenChart?: () => void
 }
 
 export function RenderMessage({
@@ -30,7 +31,8 @@ export function RenderMessage({
   chatId,
   addToolResult,
   onUpdateMessage,
-  reload
+  reload,
+  onOpenChart
 }: RenderMessageProps) {
   const relatedQuestions = useMemo(
     () =>
@@ -148,6 +150,7 @@ export function RenderMessage({
                 showActions={isLastPart}
                 messageId={messageId}
                 reload={reload}
+                onOpenChart={onOpenChart}
               />
             )
           case 'reasoning':

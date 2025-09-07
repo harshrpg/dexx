@@ -1,5 +1,7 @@
 'use client';
 
+import { useAppSelector } from "@/lib/store/hooks";
+import Datafeed from "@/lib/tradingview/datafeed";
 import { loadScript, loadCSS } from "@/lib/tv/utils";
 import { useEffect, useRef, useState } from "react";
 
@@ -11,6 +13,7 @@ const TradingViewWrapper = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const symbol = useAppSelector((s) => s.advancedMode.symbol);
 
     useEffect(() => {
         let isMounted = true;
@@ -29,7 +32,7 @@ const TradingViewWrapper = () => {
                 try {
                     console.log('[trading-view-wrapper] Loading Scripts');
                     console.log('[trading-view-wrapper] Loading charting-library');
-                    await loadScript('/charting_library/charting_library/charting_library.standalone.js');
+                    await loadScript('/charting_library/charting_library/charting_library.js');
 
                     console.log('[trading-view-wrapper] Loading datafeeds');
                     await loadScript('/charting_library/datafeeds/udf/dist/bundle.js');
@@ -63,7 +66,7 @@ const TradingViewWrapper = () => {
                 if (typeof window !== 'undefined' && (window as any).TradingView) {
                     widget = new (window as any).TradingView.widget({
                         container: containerRef.current,
-                        symbol: 'AAPL', // Default symbol
+                        symbol: symbol, // Default symbol
                         interval: '1D',
                         theme: 'light',
                         style: '1',
@@ -74,14 +77,12 @@ const TradingViewWrapper = () => {
                         container_id: 'tradingview_widget',
                         width: '100%',
                         height: '100%',
-                        fullscreen: true,
+                        fullscreen: false,
                         // Configure the correct bundle path
                         library_path: '/charting_library/charting_library/',
                         // Load custom CSS
                         custom_css_url: '/charting_library/themed.css',
-                        datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
-                            'https://demo_feed.tradingview.com'
-                        )
+                        datafeed: Datafeed
                     });
 
                     console.log('[trading-view-wrapper] Widget Initialized successfully');
@@ -114,8 +115,8 @@ const TradingViewWrapper = () => {
     if (error) {
         return (
             <div style={{
-                width: '100vw',
-                height: '100vh',
+                width: '100%',
+                height: '100%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -131,8 +132,8 @@ const TradingViewWrapper = () => {
 
     return (
         <div style={{
-            width: '100vw',
-            height: '100vh',
+            width: '100%',
+            height: '100%',
             position: 'relative',
             backgroundColor: '#000'
         }}>

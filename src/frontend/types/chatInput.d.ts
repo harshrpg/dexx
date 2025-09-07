@@ -1,0 +1,1 @@
+export type AdvancedModeState = { value: boolean, symbol: string }

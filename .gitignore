@@ -10,7 +10,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -42,8 +41,6 @@ yarn-error.log*
 *.tsbuildinfo
 .next/
 .nuxt/
-dist/
-build/
 
 # IDEs
 .vscode/
