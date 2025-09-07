@@ -38,6 +38,7 @@ interface ChatPanelProps {
   /** Reference to the scroll container */
   scrollContainerRef: React.RefObject<HTMLDivElement>
   advancedModeValues?: AdvancedModeState
+  chatId?: string
 }
 
 export function ChatPanel({
@@ -53,7 +54,8 @@ export function ChatPanel({
   models,
   showScrollToBottomButton,
   scrollContainerRef,
-  advancedModeValues
+  advancedModeValues,
+  chatId
 }: ChatPanelProps) {
   const [showEmptyScreen, setShowEmptyScreen] = useState(false)
   const router = useRouter()
@@ -139,6 +141,22 @@ export function ChatPanel({
       symbol: advancedSymbol
     }
     dispatch(set(advancedModeValue));
+
+    // Persist the advanced settings for this chat in Redis
+    if (chatId) {
+      const payload = {
+        chatId,
+        advancedChatEnabled: advancedEnabled,
+        advancedChatSymbol: advancedSymbol
+      }
+      fetch('/api/chat/preferences', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(() => {
+        // Silently ignore persistence errors on the client
+      })
+    }
   }, [advancedEnabled, advancedSymbol])
 
   // Scroll to the bottom of the container

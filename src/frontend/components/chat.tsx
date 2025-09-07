@@ -243,6 +243,7 @@ export function Chat({
         showScrollToBottomButton={!isAtBottom}
         scrollContainerRef={scrollContainerRef}
         advancedModeValues={advancedModeValues}
+        chatId={id}
       />
     </div>
   )
